@@ -1,11 +1,12 @@
 #include "header.h"
 
-int get_count_room_links(char *line)
+int get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *links)
 {
-	char	*line;
 	char	**datas;
 	int		verbose;
 
+	(void)rooms;
+	(void)links;
 	verbose = 0;
 	if (line[0] != '#')
 	{
@@ -16,16 +17,21 @@ int get_count_room_links(char *line)
 			verbose++;
 		}
 		else
-			(*room_count)++;
+		{
+			miss_room = false;
+		}
 		ft_freetab(datas);
 		datas = ft_strsplit(line, '-');
 		if (!datas[0] || !datas[1] || datas[2])
 			verbose++;
 		else
-			(*link_count)++;
+		{
+			;
+		}
+		ft_freetab(datas);
 		if (verbose == 2)
 		{
-			perror("Map invalid");
+			//perror("Map invalid");
 			return (-1);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/11/28 15:14:02 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/11/28 19:48:45 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,21 @@ typedef struct s_rooms
 	char        *name;
 	int         x;
 	int         y;
-	void        *next;
+	struct s_list *next;
 }               t_rooms;
 
 typedef struct s_links
 {
-	char        *room_a;
-	char        *room_b;
-	void        *next;
+	char		*room_a;
+	char		*room_b;
+	struct s_links *next;
 }               t_links;
 
 typedef struct s_map
 {
-	char    *line;
-	void    *next;
+	char	*line;
+	struct s_map *next;
+	struct s_map *prev;
 }               t_map;
 
 typedef struct s_path
@@ -70,5 +71,6 @@ typedef struct s_data
 }				t_data;
 
 int				get_next_line(int const fd, char **line);
-int				get_count_room_links(char *line);
+int				get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *link);
+void			ft_lstinser(t_map *alst, t_map *new);
 #endif

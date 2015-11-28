@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/11/28 15:13:59 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/11/28 19:57:11 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static int check_line(char *line, bool *miss_start, bool *miss_end)
 		*miss_end = false;
 		return (1);
 	}
-	else if (line[0] == '#')
-		return (3);
 	return (0);
 }
 
@@ -72,15 +70,28 @@ static int open_file(t_data *data)
 	char	*line;
 	int		argument;
 	int 	fd  = open("maps/base_map.txt", O_RDWR);
+	t_map	*map_line;
+
+	//data->map = malloc(sizeof(t_map));
 	/// enlever fd et mettre 0 apres //
 	get_next_line(fd, &line);
+	map_line = malloc(sizeof(t_map));
+	map_line->line = ft_strdup(line);
+	ft_lstinser(data->map, map_line);
 	if (get_ants(line) == -1)
 		return (-1);
 	while (get_next_line(fd, &line))
 	{
+		map_line = malloc(sizeof(t_map));
+		map_line->line = ft_strdup(line);
+		ft_lstinser(data->map, map_line);
 		if ((argument = check_line(line, &data->miss_start, &data->miss_end)) > 0)
 		{
-			get_next_line(fd, &line);
+			if (get_next_line(fd, &line) != 1)
+				return (-1);
+			map_line = malloc(sizeof(t_map));
+			map_line->line = ft_strdup(line);
+			ft_lstinser(data->map, map_line);
 			if (argument == 2)
 			{
 				if (get_start_end_room(line, data->start_room, data->end_room, 0) == -1)
@@ -92,9 +103,19 @@ static int open_file(t_data *data)
 					return (-1);
 			}
 		}
+		if (get_count_room_links(line, &data->miss_room, data->rooms, data->links) == -1)
+		{
+			// start traitement //
+		}
 	}
 
 	// put in a error function //
+	data->map = data->map->next;
+	while (data->map)
+	{
+		printf("%s\n", data->map->line);
+		data->map = data->map->next;
+	}
 	if (data->miss_start || data->miss_end)
 	{
 		perror("Error: There is no start or end\n");
@@ -112,6 +133,8 @@ int main(void)
 {
 	t_data data;
 
+	data.map->next = NULL;
+	data.map->prev = NULL;
 	data.miss_start = true;
 	data.miss_end = true;
 	data.miss_room = true;
