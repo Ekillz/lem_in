@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/11/27 15:44:50 by emammadz         ###   ########.fr        #
+#    Updated: 2015/11/28 14:23:14 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ EXEC = lem-in
 
 SRCC =	main.c\
 		get_next_line.c\
+		parsing.c\
 
 SRCO = $(SRCC:%.c=%.o)
 
