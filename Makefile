@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/11/28 16:39:51 by emammadz         ###   ########.fr        #
+#    Updated: 2015/11/30 14:07:15 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCC =	main.c\
 		get_next_line.c\
 		parsing.c\
 		ft_lsts.c\
+		error.c\
 
 SRCO = $(SRCC:%.c=%.o)
 

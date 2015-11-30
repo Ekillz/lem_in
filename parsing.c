@@ -5,8 +5,6 @@ int get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *l
 	char	**datas;
 	int		verbose;
 
-	(void)rooms;
-	(void)links;
 	verbose = 0;
 	if (line[0] != '#')
 	{
@@ -18,22 +16,18 @@ int get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *l
 		}
 		else
 		{
-			miss_room = false;
+			ft_lstinsert(rooms, create_node(datas,"t_rooms"), "t_rooms");
+			*miss_room = false;
 		}
 		ft_freetab(datas);
 		datas = ft_strsplit(line, '-');
 		if (!datas[0] || !datas[1] || datas[2])
 			verbose++;
 		else
-		{
-			;
-		}
+			ft_lstinsert(links, create_node(datas, "t_links"), "t_links");
 		ft_freetab(datas);
 		if (verbose == 2)
-		{
-			//perror("Map invalid");
 			return (-1);
-		}
 	}
 	return (0);
 }
