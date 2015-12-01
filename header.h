@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/01 14:31:16 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/01 18:46:56 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_path
 	int			x;
 	int			y;
 	int			nb_links;
+	bool		is_free;
+	char		*last_path; // assign when ant moves //
 	struct 		s_path		**links;
 }				t_path;
 
@@ -70,6 +72,7 @@ typedef struct s_data
 	t_rooms		*rooms;
 	t_links		*links;
 	t_path		**paths;
+	t_path		**ants;
 }				t_data;
 
 int				get_next_line(int const fd, char **line);
@@ -80,4 +83,6 @@ int				check_missing_data(bool start, bool end, bool room);
 void			*create_node(void *data, const char *type);
 void			declare_structs(t_data *data);
 void			link_rooms(t_data *data);
+void			assign_ants(t_data *data);
+t_path			*get_room_by_name(t_path **all_paths, const char *name);
 #endif

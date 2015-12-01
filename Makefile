@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/12/01 13:51:40 by emammadz         ###   ########.fr        #
+#    Updated: 2015/12/01 18:18:43 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCC =	main.c\
 		ft_lsts.c\
 		error.c\
 		data_struct.c\
+		data_struct2.c\
 
 SRCO = $(SRCC:%.c=%.o)
 

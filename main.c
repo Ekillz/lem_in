@@ -6,13 +6,13 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/01 14:16:52 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/01 18:51:51 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static int get_start_end_room(char *line, t_rooms *start_room, t_rooms *end_room, int which)
+static int get_start_end_room(char *line, t_rooms **start_room, t_rooms **end_room, int which)
 {
 	char	**datas;
 
@@ -25,17 +25,17 @@ static int get_start_end_room(char *line, t_rooms *start_room, t_rooms *end_room
 	}
 	if (which == 0)
 	{
-		start_room = malloc(sizeof(t_rooms));
-		start_room->name = ft_strdup(datas[0]);
-		start_room->x = ft_atoi(datas[1]);
-		start_room->y = ft_atoi(datas[2]);
+		*start_room = malloc(sizeof(t_rooms));
+		(*start_room)->name = ft_strdup(datas[0]);
+		(*start_room)->x = ft_atoi(datas[1]);
+		(*start_room)->y = ft_atoi(datas[2]);
 	}
 	else
 	{
-		end_room = malloc(sizeof(t_rooms));
-		end_room->name = ft_strdup(datas[0]);
-		end_room->x = ft_atoi(datas[1]);
-		end_room->y = ft_atoi(datas[2]);
+		*end_room = malloc(sizeof(t_rooms));
+		(*end_room)->name = ft_strdup(datas[0]);
+		(*end_room)->x = ft_atoi(datas[1]);
+		(*end_room)->y = ft_atoi(datas[2]);
 	}
 	ft_freetab(datas);
 	return (0);
@@ -91,12 +91,12 @@ static int open_file(t_data *data)
 			ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 			if (argument == 2)
 			{
-				if (get_start_end_room(line, data->start_room, data->end_room, 0) == -1)
+				if (get_start_end_room(line, &data->start_room, &data->end_room, 0) == -1)
 					return (-1);
 			}
 			else if (argument == 1)
 			{
-				if (get_start_end_room(line, data->start_room, data->end_room, 1) == -1)
+				if (get_start_end_room(line, &data->start_room, &data->end_room, 1) == -1)
 					return (-1);
 			}
 		}
@@ -128,7 +128,7 @@ int main(void)
 	data.miss_room = true;
 	if (open_file(&data) == -1)
 		exit(-1);
-	// start //
 	link_rooms(&data);
+	assign_ants(&data);
 	return (0);
 }
