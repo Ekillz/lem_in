@@ -1,6 +1,19 @@
 #include "header.h"
 
-int get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *links)
+void	declare_structs(t_data *data)
+{
+	data->map = malloc(sizeof(t_map));
+	data->map->next = NULL;
+	data->rooms = malloc(sizeof(t_rooms));
+	data->rooms->next = NULL;
+	data->links = malloc(sizeof(t_links));
+	data->links->next = NULL;
+	data->miss_start = true;
+	data->miss_end = true;
+	data->miss_room = true;
+}
+
+int		get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *links)
 {
 	char	**datas;
 	int		verbose;

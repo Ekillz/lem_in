@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/11/30 18:06:14 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/01 14:31:16 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_path
 	char		*name;
 	int			x;
 	int			y;
+	int			nb_links;
 	struct 		s_path		**links;
 }				t_path;
 
@@ -64,9 +65,11 @@ typedef struct s_data
 	bool		miss_start;
 	bool		miss_end;
 	bool		miss_room;
+	int			nb_ants;
 	t_map		*map;
 	t_rooms		*rooms;
 	t_links		*links;
+	t_path		**paths;
 }				t_data;
 
 int				get_next_line(int const fd, char **line);
@@ -75,4 +78,6 @@ void			ft_lstinsert(void *alst, void *new, const char *type);
 void			ft_lstreverse(t_map **map);
 int				check_missing_data(bool start, bool end, bool room);
 void			*create_node(void *data, const char *type);
+void			declare_structs(t_data *data);
+void			link_rooms(t_data *data);
 #endif

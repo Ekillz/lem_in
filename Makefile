@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/11/30 14:07:15 by emammadz         ###   ########.fr        #
+#    Updated: 2015/12/01 13:51:40 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCC =	main.c\
 		parsing.c\
 		ft_lsts.c\
 		error.c\
+		data_struct.c\
 
 SRCO = $(SRCC:%.c=%.o)
 
@@ -24,7 +25,7 @@ FLAG = -Wall -Werror -Wextra -ggdb
 
 .PHONY: all fast clean fclean
 
-all: philo
+all: lem-in
 
 %.o: %.c
 	@make -C libft
@@ -32,7 +33,7 @@ all: philo
 	@gcc -o $@ -c $< $(FLAG) 
 	@echo
 
-philo: $(SRCO)
+lem-in: $(SRCO)
 	@gcc -o $(EXEC) $(FLAG) $(SRCO) libft/libft.a
 
 clean:

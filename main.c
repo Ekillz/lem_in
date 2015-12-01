@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/11/30 18:13:00 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/01 14:16:52 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int check_line(char *line, bool *miss_start, bool *miss_end)
 	return (0);
 }
 
-static int get_ants(char *line)
+static int get_ants(char *line, int *nb_ants)
 {
 	int ant;
 
@@ -66,6 +66,7 @@ static int get_ants(char *line)
 		perror("Not enough ants or not digit");
 		return (-1);
 	}
+	*nb_ants = ant;
 	return (0);
 }
 
@@ -78,7 +79,7 @@ static int open_file(t_data *data)
 	/// enlever fd et mettre 0 apres ///
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
-	if (get_ants(line) == -1)
+	if (get_ants(line, &data->nb_ants) == -1)
 		return (-1);
 	while (get_next_line(fd, &line))
 	{
@@ -105,6 +106,7 @@ static int open_file(t_data *data)
 	data->map = data->map->next;
 	ft_lstreverse(&data->map);
 	data->links = data->links->next;
+	data->rooms = data->rooms->next;
 	if (check_missing_data(data->miss_start, data->miss_end, data->miss_room) == -1)
 		return (-1);
 	return (0);
@@ -114,6 +116,7 @@ int main(void)
 {
 	t_data data;
 
+	declare_structs(&data);
 	data.map = malloc(sizeof(t_map));
 	data.map->next = NULL;
 	data.rooms = malloc(sizeof(t_rooms));
@@ -126,5 +129,6 @@ int main(void)
 	if (open_file(&data) == -1)
 		exit(-1);
 	// start //
+	link_rooms(&data);
 	return (0);
 }
