@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/01 18:51:51 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/01 19:25:56 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,6 @@ int main(void)
 	t_data data;
 
 	declare_structs(&data);
-	data.map = malloc(sizeof(t_map));
-	data.map->next = NULL;
-	data.rooms = malloc(sizeof(t_rooms));
-	data.rooms->next = NULL;
-	data.links = malloc(sizeof(t_links));
-	data.links->next = NULL;
-	data.miss_start = true;
-	data.miss_end = true;
-	data.miss_room = true;
 	if (open_file(&data) == -1)
 		exit(-1);
 	link_rooms(&data);
