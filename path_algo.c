@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/02 14:58:52 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/02 15:00:08 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_weight(t_path *ant)
 
 	i = 0;
 	weight_total = malloc(sizeof(int) * ant->nb_links);
-	memset(&weight_total[ant->nb_links], 0, sizeof(int));
+	ft_memset(&weight_total[ant->nb_links], 0, sizeof(int));
 	while (i < ant->nb_links)
 	{
 		weight_total[i] = get_abs(ant->links[i]->x - ant->x) + get_abs(ant->links[i]->y - ant->y);
