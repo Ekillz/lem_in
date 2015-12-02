@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 18:16:58 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/01 18:51:53 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/02 14:52:10 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	assign_ants(t_data *data)
 
 	i = 0;
 	start_room = get_room_by_name(data->paths, data->start_room->name);
-	data->ants = malloc(sizeof(t_path) * data->nb_ants);
+	data->ants = malloc(sizeof(t_ant) * data->nb_ants);
 	while (i < data->nb_ants)
 	{
-		data->ants[i] = start_room;
+		data->ants[i] = malloc(sizeof(t_ant));
+		data->ants[i]->path = start_room;
 		i++;
 	}
 }
