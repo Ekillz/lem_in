@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/02 14:56:08 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/02 17:37:00 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ int main(void)
 		exit(-1);
 	link_rooms(&data);
 	assign_ants(&data);
-	find_path(data.start_room, data.end_room, data.paths, data.ants);
+	find_path(data.start_room, data.end_room, data.ants);
 	return (0);
 }
