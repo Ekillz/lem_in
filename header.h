@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/04 13:49:47 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/04 17:22:40 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void			declare_structs(t_data *data);
 void			link_rooms(t_data *data);
 void			assign_ants(t_data *data);
 t_path			*get_room_by_name(t_path **all_paths, const char *name);
-void			find_path(t_rooms *start, t_rooms *end, t_ant **ants);
+void			find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start);
 int				compare_last_path(t_ant *ant, int i);
 int				check_last_path_2(int *sorted_tab, int *e, int *i);
+void			alloc_last_path(t_ant **ants);
 #endif

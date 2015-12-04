@@ -6,11 +6,24 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 13:37:36 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/04 14:22:56 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/04 17:22:07 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void	alloc_last_path(t_ant **ants)
+{
+	int i;
+
+	i = 0;
+	while (ants[i])
+	{
+		ants[i]->last_path = malloc(sizeof(t_map));
+		ants[i]->last_path->next = NULL;
+		i++;
+	}
+}
 
 int		check_last_path_2(int *sorted_tab, int *e, int *i)
 {
@@ -30,7 +43,6 @@ int		compare_last_path(t_ant *ant, int i)
 	tmp = ant->last_path;
 	while (tmp)
 	{
-		printf("line: %s, link: %s\n", tmp->line, ant->path->links[i]->name);
 		if (ft_strequ(tmp->line, ant->path->links[i]->name))
 			return (-1);
 		tmp = tmp->next;
