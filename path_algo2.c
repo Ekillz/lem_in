@@ -12,12 +12,12 @@
 
 #include "header.h"
 
-void	alloc_last_path(t_ant **ants)
+void	alloc_last_path(t_ant **ants, int nb_ants)
 {
 	int i;
 
 	i = 0;
-	while (ants[i])
+	while (i < nb_ants)
 	{
 		ants[i]->last_path = malloc(sizeof(t_map));
 		ants[i]->last_path->next = NULL;

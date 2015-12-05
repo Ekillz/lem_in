@@ -38,6 +38,7 @@ static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab)
 		}
 		i++;
 	}
+	printf("sadsad");
 	return (-1);
 }
 
@@ -106,12 +107,15 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 	out = 0;
 
 	////' Grosse erreur quand je met lancien map, ca loup! ///
-	alloc_last_path(ants);
+	alloc_last_path(ants, nb_ants);
+	int t = 0;
 	while (1)
 	{
+		t++;
 		i = 0;
 		while (i < nb_ants)
 		{
+			printf("L%d-%s ", i + 1, ants[i]->path->name);
 			if ((weight_return = get_weight(ants[i], end)) >= 0)
 			{
 				if (!ft_strequ(ants[i]->path->name, start->name))
@@ -119,12 +123,14 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
 				ants[i]->path = ants[i]->path->links[weight_return];
 				ants[i]->path->is_free = false;
-				printf("L%d-%s ", i + 1, ants[i]->path->name); 
+				//printf("L%d-%s ", i + 1, ants[i]->path->name); 
 			}
 			if (ft_strequ(ants[i]->path->name, end->name))
 				out++;
 			i++;
 		}
+		if (t == 20)
+			break;
 		printf("\n");
 		if (out == nb_ants)
 			break ;
