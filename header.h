@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/04 17:22:40 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 13:37:33 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_ant
 {
 	t_map		*last_path; // assign when ant moves //
 	t_path		*path;
+	bool		is_out;
 }				t_ant;
 
 typedef struct s_data

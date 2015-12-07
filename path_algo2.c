@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 13:37:36 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/04 17:22:07 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 13:36:32 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		check_last_path_2(int *sorted_tab, int *e, int *i)
 	if (sorted_tab[*e + 1])
 	{
 		(*e)++;
-		(*i) = 0;
+		(*i) = -1;
 		return (1);
 	}
 	return (-1);

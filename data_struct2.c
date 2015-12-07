@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 18:16:58 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/02 17:36:43 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 13:40:06 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	assign_ants(t_data *data)
 	{
 		data->ants[i] = malloc(sizeof(t_ant));
 		data->ants[i]->path = start_room;
+		//data->ants[i]->is_out = false;
 		i++;
 	}
 }

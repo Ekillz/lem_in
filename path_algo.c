@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/04 18:05:26 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 13:40:19 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab)
 		}
 		i++;
 	}
-	printf("sadsad");
 	return (-1);
 }
 
@@ -50,6 +49,7 @@ static int	*sort(int *tab, int len)
 
 	i = 0;
 	new_tab = malloc(sizeof(int) * len);
+	ft_memset(&new_tab[len], 0, sizeof(int));
 	while (tab[i])
 	{
 		new_tab[i] = tab[i];
@@ -106,16 +106,13 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 
 	out = 0;
 
-	////' Grosse erreur quand je met lancien map, ca loup! ///
 	alloc_last_path(ants, nb_ants);
-	int t = 0;
 	while (1)
 	{
-		t++;
 		i = 0;
 		while (i < nb_ants)
 		{
-			printf("L%d-%s ", i + 1, ants[i]->path->name);
+			printf("L%d-%s ", i + 1, ants[i]->path->name); 
 			if ((weight_return = get_weight(ants[i], end)) >= 0)
 			{
 				if (!ft_strequ(ants[i]->path->name, start->name))
@@ -123,14 +120,14 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
 				ants[i]->path = ants[i]->path->links[weight_return];
 				ants[i]->path->is_free = false;
-				//printf("L%d-%s ", i + 1, ants[i]->path->name); 
 			}
-			if (ft_strequ(ants[i]->path->name, end->name))
+			if (ft_strequ(ants[i]->path->name, end->name)) //&& !ants[i]->is_out)
+			{
+				//ants[i]->is_out = true;
 				out++;
+			}
 			i++;
 		}
-		if (t == 20)
-			break;
 		printf("\n");
 		if (out == nb_ants)
 			break ;
