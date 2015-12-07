@@ -6,13 +6,13 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 15:26:54 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 17:41:52 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static int get_start_end_room(char *line, t_data *data, int which)
+static bool	get_start_end_room(char *line, t_data *data, int which)
 {
 	char	**datas;
 
@@ -21,7 +21,7 @@ static int get_start_end_room(char *line, t_data *data, int which)
 			ft_isdigit(ft_atoi(datas[1])) || ft_isdigit(ft_atoi(datas[2])))
 	{
 		ft_freetab(datas);
-		return (-1);
+		return (false);
 	}
 	if (which == 0)
 	{
@@ -40,7 +40,7 @@ static int get_start_end_room(char *line, t_data *data, int which)
 		data->end_room->y = ft_atoi(datas[2]);
 	}
 	ft_freetab(datas);
-	return (1);
+	return (true);
 }
 
 static int check_line(char *line)
@@ -59,7 +59,7 @@ static int get_ants(char *line, int *nb_ants)
 	ant = ft_atoi(line);
 	if (ant <= 0 || ft_isdigit(ant))
 	{
-		perror("Not enough ants or not digit");
+		ft_putendl("Not enough ants or not digit");
 		return (-1);
 	}
 	*nb_ants = ant;
@@ -70,10 +70,9 @@ static int open_file(t_data *data)
 {
 	char	*line;
 	int		argument;
-	//int 	fd  = open("maps/base_map.txt", O_RDWR);
-	int 	fd  = open("maps/map2.txt", O_RDWR);
+	int		fd;
 
-	/// enlever fd et mettre 0 apres ///
+	fd = 0;
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 	if (get_ants(line, &data->nb_ants) == -1)
@@ -93,13 +92,14 @@ static int open_file(t_data *data)
 				}
 				else if (argument == 1)
 				{
-					if (get_start_end_room(line, data, 1) == 1)
+					if (get_start_end_room(line, data, 1))
 						break ;
 				}
 			}
 		}
 		if (get_count_room_links(line, &data->miss_room, data->rooms, data->links) == -1)
 			break ;
+
 	}
 	data->map = data->map->next;
 	ft_lstreverse(&data->map);
@@ -119,6 +119,7 @@ int main(void)
 		exit(-1);
 	link_rooms(&data);
 	assign_ants(&data);
+	show_map(data.map);
 	find_path(data.end_room, data.ants, data.nb_ants, data.start_room);
 	return (0);
 }

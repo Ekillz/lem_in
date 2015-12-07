@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   show_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/30 13:52:30 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 17:16:14 by emammadz         ###   ########.fr       */
+/*   Created: 2015/12/07 16:21:00 by emammadz          #+#    #+#             */
+/*   Updated: 2015/12/07 17:15:44 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int check_missing_data(bool start, bool end, bool room)
+void	show_map(t_map *map)
 {
-	if (start || end)
+	t_map *tmp;
+
+	tmp = map;
+	while (map)
 	{
-		ft_putendl("Error: There is no start or end");
-		return (-1);
+		ft_putendl(map->line);
+		map = map->next;
 	}
-	if (room)
-	{
-		ft_putendl("There is no room");
-		return (-1);
-	}
-	return (0);
+	ft_putchar('\n');
+}
+
+void	show_moves(int i, const char *name)
+{
+	ft_putchar('L');
+	ft_putnbr(i + 1);
+	ft_putchar('-');
+	ft_putstr(name);
+	ft_putchar(' ');
 }

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 13:48:35 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 16:25:46 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,6 @@ void			find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start);
 int				compare_last_path(t_ant *ant, int i);
 int				check_last_path_2(int *sorted_tab, int *e, int *i);
 void			alloc_last_path(t_ant **ants, int nb_ants);
+void			show_moves(int i, const char *name);
+void			show_map(t_map *map);
 #endif

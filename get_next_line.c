@@ -6,47 +6,51 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:57:28 by emammadz          #+#    #+#             */
-/*   Updated: 2015/11/27 16:51:50 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 17:11:38 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static char		*biggerbuf(int const fd, char *buf, int *ret)
+int		is_there_line(char *left, char **line)
 {
-	char			tmp[BUFF_SIZE + 1];
-	char			*tmp2;
+	char	*end;
 
-	*ret = read(fd, tmp, BUFF_SIZE);
-	tmp[*ret] = '\0';
-	tmp2 = buf;
-	buf = ft_strjoin(buf, tmp);
-	ft_strdel(&tmp2);
-	return (buf);
+	if (!left)
+		return (0);
+	if ((end = ft_strchr(left, '\n')))
+	{
+		*line = ft_strsub(left, 0, ft_strlen(left) - ft_strlen(end));
+		return (1);
+	}
+	return (0);
 }
 
-int				get_next_line(int const fd, char **line)
+int		get_next_line(int const fd, char **line)
 {
-	static char		*buf = "";
 	int				ret;
-	char			*str;
+	char			buf[BUFF_SIZE + 1];
+	static char		*left;
 
-	if (!line || fd < 0)
+	if (fd < 0 || !line)
 		return (-1);
-	ret = 1;
-	if (buf[0] == '\0')
-		buf = ft_strnew(0);
-	while (ret > 0)
+	if (is_there_line(left, line))
 	{
-		if ((str = ft_strchr(buf, '\n')) != NULL)
+		left = ft_strchr(left, '\n') + 1;
+		return (1);
+	}
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	{
+		buf[ret] = '\0';
+		left = ft_strjoin(left, buf);
+		if (is_there_line(left, line))
 		{
-			*str = '\0';
-			*line = ft_strdup(buf);
-			ft_memmove(buf, str + 1, ft_strlen(str + 1) + 1);
+			left = ft_strchr(left, '\n') + 1;
 			return (1);
 		}
-		buf = biggerbuf(fd, buf, &ret);
 	}
-	free(buf);
-	return (ret);
+	if (!left)
+		left = ft_strnew(1);
+	*line = ft_strdup(left);
+	return (0);
 }

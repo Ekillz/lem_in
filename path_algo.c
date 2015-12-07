@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 15:27:10 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 16:59:08 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab, t_roo
 	{
 		if (weight_total[i] == sorted_tab[e])
 		{
-			//printf(" weight_total[%d] : %d   sorted_tab[%d] : %d ", i, weight_total[i], e, sorted_tab[e]);
 			if (compare_last_path(ant, i) >= 0 && (ant->path->links[i]->is_free || ft_strequ(ant->path->links[i]->name, end->name)))
 			{
 				free(weight_total);
@@ -96,8 +95,6 @@ static int	get_weight(t_ant *ant, t_rooms *end_room)
 			weight_total[i] += 1000000;
 		if (ft_strequ(ant->path->links[i]->name, end_room->name))
 			weight_total[i] = 1;
-		//printf(" weight_total[%d] : %d ", i, weight_total[i]);
-		//printf("current_room : %s, link : %s = 	%d\n", ant->path->name, ant->path->links[i]->name, weight_total[i]);
 		i++;
 	}
 	tmp_tab = sort(weight_total, ant->path->nb_links);
@@ -111,11 +108,9 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 	int		out;
 
 	out = 0;
-	int t = 0;
 	alloc_last_path(ants, nb_ants);
 	while (1)
 	{
-		t++;
 		i = 0;
 		while (i < nb_ants)
 		{
@@ -126,7 +121,7 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
 				ants[i]->path = ants[i]->path->links[weight_return];
 				ants[i]->path->is_free = false;
-				printf("L%d-%s ", i + 1, ants[i]->path->name); 
+				show_moves(i, ants[i]->path->name);
 			}
 			if (ft_strequ(ants[i]->path->name, end->name) && !ants[i]->is_out)
 			{
@@ -135,12 +130,8 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 			}
 			i++;
 		}
-		if (t == 20)
-			break ;
-		printf("\n");
+		ft_putchar('\n');
 		if (out == nb_ants)
 			break ;
 	}
-	printf("Found my way\n");
-	// Si temps regler le soucis du premier element NULL, mais pas besoin encore ca marche sans //
 }

@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/12/04 13:50:21 by emammadz         ###   ########.fr        #
+#    Updated: 2015/12/07 16:26:18 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCC =	main.c\
 		data_struct2.c\
 		path_algo.c\
 		path_algo2.c\
+		show_funcs.c\
 
 SRCO = $(SRCC:%.c=%.o)
 
