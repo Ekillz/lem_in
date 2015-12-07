@@ -6,29 +6,30 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 13:40:19 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/07 15:27:10 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab)
+static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab, t_rooms *end)
 {
 	int i;
 	int	e;
 
 	e = 0;
 	i = 0;
+	if (ant->is_out)
+		return (-1);
 	while (weight_total[i])
 	{
 		if (weight_total[i] == sorted_tab[e])
 		{
-			if (compare_last_path(ant, i) >= 0)
+			//printf(" weight_total[%d] : %d   sorted_tab[%d] : %d ", i, weight_total[i], e, sorted_tab[e]);
+			if (compare_last_path(ant, i) >= 0 && (ant->path->links[i]->is_free || ft_strequ(ant->path->links[i]->name, end->name)))
 			{
 				free(weight_total);
-				if (ant->path->links[i]->is_free)
-					return (i);
-				return (-1);
+				return (i);
 			}
 			else
 			{
@@ -90,12 +91,17 @@ static int	get_weight(t_ant *ant, t_rooms *end_room)
 	while (i < ant->path->nb_links)
 	{
 		weight_total[i] = get_abs(end_room->x - ant->path->links[i]->x) + get_abs(end_room->y - ant->path->links[i]->y);
-		weight_total[i]++;
+		weight_total[i] += 2;
+		if (!ant->path->links[i]->is_free)
+			weight_total[i] += 1000000;
+		if (ft_strequ(ant->path->links[i]->name, end_room->name))
+			weight_total[i] = 1;
+		//printf(" weight_total[%d] : %d ", i, weight_total[i]);
 		//printf("current_room : %s, link : %s = 	%d\n", ant->path->name, ant->path->links[i]->name, weight_total[i]);
 		i++;
 	}
 	tmp_tab = sort(weight_total, ant->path->nb_links);
-	return (check_last_path(ant, weight_total, tmp_tab));
+	return (check_last_path(ant, weight_total, tmp_tab, end_room));
 }
 
 void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
@@ -105,14 +111,14 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 	int		out;
 
 	out = 0;
-
+	int t = 0;
 	alloc_last_path(ants, nb_ants);
 	while (1)
 	{
+		t++;
 		i = 0;
 		while (i < nb_ants)
 		{
-			printf("L%d-%s ", i + 1, ants[i]->path->name); 
 			if ((weight_return = get_weight(ants[i], end)) >= 0)
 			{
 				if (!ft_strequ(ants[i]->path->name, start->name))
@@ -120,14 +126,17 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
 				ants[i]->path = ants[i]->path->links[weight_return];
 				ants[i]->path->is_free = false;
+				printf("L%d-%s ", i + 1, ants[i]->path->name); 
 			}
-			if (ft_strequ(ants[i]->path->name, end->name)) //&& !ants[i]->is_out)
+			if (ft_strequ(ants[i]->path->name, end->name) && !ants[i]->is_out)
 			{
-				//ants[i]->is_out = true;
+				ants[i]->is_out = true;
 				out++;
 			}
 			i++;
 		}
+		if (t == 20)
+			break ;
 		printf("\n");
 		if (out == nb_ants)
 			break ;
