@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 16:59:08 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/08 18:10:28 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,9 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 	int		weight_return;
 	int		i;
 	int		out;
+	int		fd;
 
+	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt", O_RDWR | O_APPEND);
 	out = 0;
 	alloc_last_path(ants, nb_ants);
 	while (1)
@@ -121,7 +123,7 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
 				ants[i]->path = ants[i]->path->links[weight_return];
 				ants[i]->path->is_free = false;
-				show_moves(i, ants[i]->path->name);
+				show_moves(i, ants[i]->path->name, fd);
 			}
 			if (ft_strequ(ants[i]->path->name, end->name) && !ants[i]->is_out)
 			{
@@ -131,7 +133,9 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 			i++;
 		}
 		ft_putchar('\n');
+		ft_putchar_fd('\n', fd);
 		if (out == nb_ants)
 			break ;
 	}
+	close(fd);
 }

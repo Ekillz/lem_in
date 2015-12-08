@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/12/07 16:26:18 by emammadz         ###   ########.fr        #
+#    Updated: 2015/12/08 16:16:21 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCC =	main.c\
 		path_algo.c\
 		path_algo2.c\
 		show_funcs.c\
+		unity_file.c\
 
 SRCO = $(SRCC:%.c=%.o)
 
