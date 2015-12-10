@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/08 15:52:55 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/10 18:02:33 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static int get_ants(char *line, int *nb_ants)
 	int ant;
 
 	ant = ft_atoi(line);
-	if (ant <= 0 || ft_isdigit(ant))
+	if (ant <= 0)
 	{
+		printf("%d", ft_isdigit(ant));
 		ft_putendl("Not enough ants or not digit");
 		return (-1);
 	}

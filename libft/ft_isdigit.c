@@ -6,7 +6,7 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 18:14:06 by emammadz          #+#    #+#             */
-/*   Updated: 2015/10/22 15:59:40 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/10 16:37:20 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int ft_isdigit(int c)
 {
-	if ((unsigned int)c <= '9' && (unsigned int)c >= '0')
-		return (1);
-	else
-		return (0);
+	return (c >= '0' && c <= '9');
 }

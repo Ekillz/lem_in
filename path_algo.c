@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/08 18:10:28 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/10 18:09:10 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	*sort(int *tab, int len)
 	i = 0;
 	new_tab = malloc(sizeof(int) * len);
 	ft_memset(&new_tab[len], 0, sizeof(int));
-	while (tab[i])
+	while (i < len)
 	{
 		new_tab[i] = tab[i];
 		i++;
