@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/08 16:42:13 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/11 18:07:02 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_path
 	int			y;
 	int			nb_links;
 	bool		is_free;
+	bool		is_end;
 	struct 		s_path		**links;
 }				t_path;
 
@@ -98,4 +99,6 @@ void			alloc_last_path(t_ant **ants, int nb_ants);
 void			show_moves(int i, const char *name, int fd);
 void			show_map(t_map *map);
 void			write_file(t_data *data);
+void			recursive_check_path(t_path *path);
+void			no_path_possible(void);
 #endif

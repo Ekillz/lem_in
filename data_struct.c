@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 13:50:27 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 16:57:38 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/11 18:11:51 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void			link_rooms(t_data *data)
 	while (i < list_len)
 	{
 		data->paths[i] = malloc(sizeof(t_path));
+		data->paths[i]->is_end = malloc(sizeof(bool));
+		data->paths[i]->is_end = false;
 		get_links(tmp_room, data->links, &data->paths[i]->nb_links, data->paths[i]);
 		tmp_room = tmp_room->next;
 		i++;
@@ -103,7 +105,7 @@ void			link_rooms(t_data *data)
 	i = 0;
 	while (i < list_len)
 	{
-		data->paths[i]->links = malloc(sizeof(t_path) * data->paths[i]->nb_links);
+		data->paths[i]->links = malloc(sizeof(t_path *) * data->paths[i]->nb_links);
 		link_path_rooms(data->paths, data->links, data->paths[i]);
 		i++;
 	}

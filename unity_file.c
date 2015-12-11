@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 15:58:57 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/09 17:25:26 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/11 14:39:32 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void		write_file(t_data *data)
 	ft_putstr_fd(ft_itoa(data->start_room->x), fd);
 	ft_putstr_fd(" ", fd);
 	ft_putstr_fd(ft_itoa(data->start_room->y), fd);
+	ft_putchar_fd('\n', fd);
+	ft_putstr_fd(data->end_room->name, fd);
+	ft_putstr_fd(" ", fd);
+	ft_putstr_fd(ft_itoa(data->end_room->x), fd);
+	ft_putstr_fd(" ", fd);
+	ft_putstr_fd(ft_itoa(data->end_room->y), fd);
 	ft_putchar_fd('\n', fd);
 	ft_putstr_fd(ft_itoa(data->nb_ants), fd);
 	ft_putchar_fd('\n', fd);

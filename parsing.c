@@ -1,5 +1,19 @@
 #include "header.h"
 
+void	recursive_check_path(t_path *path)
+{
+	int e;
+
+	path->is_end = true;
+	e = 0;
+	while (path->links[e])
+	{
+		if (!path->links[e]->is_end)
+			recursive_check_path(path->links[e]);
+		e++;
+	}
+}
+
 void	declare_structs(t_data *data)
 {
 	data->map = malloc(sizeof(t_map));

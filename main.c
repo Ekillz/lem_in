@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/10 18:11:50 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/11 18:10:28 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int get_ants(char *line, int *nb_ants)
 	ant = ft_atoi(line);
 	if (ant <= 0) // look at ft_isdigit again ( || ft_isdigit)
 	{
-		printf("%d", ft_isdigit(ant));
 		ft_putendl("Not enough ants or not digit");
 		return (-1);
 	}
@@ -73,7 +72,9 @@ static int open_file(t_data *data)
 	int		argument;
 	int		fd;
 
+
 	fd = 0;
+	//fd = open("maps/map3.txt", O_RDWR);
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 	if (get_ants(line, &data->nb_ants) == -1)
@@ -122,6 +123,9 @@ int main(void)
 	assign_ants(&data);
 	show_map(data.map);
 	write_file(&data);
+	recursive_check_path(get_room_by_name(data.paths, data.start_room->name));
+	if (!(get_room_by_name(data.paths, data.end_room->name))->is_end)
+		no_path_possible();
 	find_path(data.end_room, data.ants, data.nb_ants, data.start_room);
 	return (0);
 }
