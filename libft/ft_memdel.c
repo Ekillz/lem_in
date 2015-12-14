@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 18:18:08 by emammadz          #+#    #+#             */
-/*   Updated: 2014/11/04 18:22:16 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:38:29 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_memdel(void **ap)
+void	ft_memdel(void **ap)
 {
 	if (ap != NULL)
 	{

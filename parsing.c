@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 13:10:34 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 14:27:19 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:24:49 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,37 @@ void	declare_structs(t_data *data)
 	data->miss_room = true;
 }
 
-int		get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *links)
+void	check_room_error(char **datas, int *verbose, t_rooms *room, bool *miss)
+{
+	if (!datas[0] || !datas[1] || !datas[2] ||
+			!ft_strequ(ft_itoa(ft_atoi(datas[1])), datas[1]) ||
+			!ft_strequ(ft_itoa(ft_atoi(datas[2])), datas[2]))
+	{
+		(*verbose)++;
+	}
+	else
+	{
+		ft_lstinsert(room, create_node(datas, "t_rooms"), "t_rooms");
+		*miss = false;
+	}
+}
+
+int		get_count_room_links(char *l, bool *miss, t_rooms *room, t_links *link)
 {
 	char	**datas;
 	int		verbose;
 
 	verbose = 0;
-	if (line[0] != '#')
+	if (l[0] != '#')
 	{
-		datas = ft_strsplit(line, ' ');
-		if (!datas[0] || !datas[1] || !datas[2] ||
-				!ft_strequ(ft_itoa(ft_atoi(datas[1])), datas[1]) ||
-				!ft_strequ(ft_itoa(ft_atoi(datas[2])), datas[2]))
-		{
-			verbose++;
-		}
-		else
-		{
-			ft_lstinsert(rooms, create_node(datas,"t_rooms"), "t_rooms");
-			*miss_room = false;
-		}
+		datas = ft_strsplit(l, ' ');
+		check_room_error(datas, &verbose, room, miss);
 		ft_freetab(datas);
-		datas = ft_strsplit(line, '-');
+		datas = ft_strsplit(l, '-');
 		if (!datas[0] || !datas[1] || datas[2])
 			verbose++;
 		else
-			ft_lstinsert(links, create_node(datas, "t_links"), "t_links");
+			ft_lstinsert(link, create_node(datas, "t_links"), "t_links");
 		ft_freetab(datas);
 		if (verbose == 2)
 			return (-1);

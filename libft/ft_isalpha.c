@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 17:35:08 by emammadz          #+#    #+#             */
-/*   Updated: 2015/10/22 15:54:10 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:36:12 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalpha(int c)
+int	ft_isalpha(int c)
 {
 	if ((unsigned int)c >= 'A' && (unsigned int)c <= 'Z')
 		return (1);

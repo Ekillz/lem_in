@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 18:54:52 by emammadz          #+#    #+#             */
-/*   Updated: 2014/12/29 17:15:09 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:39:42 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_strclr(char *s)
+void	ft_strclr(char *s)
 {
 	int i;
 

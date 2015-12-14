@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 18:20:36 by emammadz          #+#    #+#             */
-/*   Updated: 2015/10/22 16:24:25 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:35:55 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	if (ft_isalpha(c) == 1 || ft_isdigit(c) == 1)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 18:16:58 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/11 16:59:31 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:44:51 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	assign_ants(t_data *data)
 {
 	int		i;
-	t_path *start_room;
+	t_path	*start_room;
 
 	i = 0;
 	start_room = get_room_by_name(data->paths, data->start_room->name);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lsts.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/14 16:59:21 by emammadz          #+#    #+#             */
+/*   Updated: 2015/12/14 17:12:06 by emammadz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
-void	ft_lstinsert(void *alst, void *new, const char *type)
+void			ft_lstinsert(void *alst, void *new, const char *type)
 {
 	if (!new)
 		return ;
@@ -11,8 +23,8 @@ void	ft_lstinsert(void *alst, void *new, const char *type)
 	}
 	else if (ft_strequ(type, "t_rooms"))
 	{
-		((t_rooms *)new)->next = ((t_rooms *)alst)->next;
-		((t_rooms *)alst)->next = (t_rooms *)new;
+		((t_rooms*)new)->next = ((t_rooms *)alst)->next;
+		((t_rooms*)alst)->next = (t_rooms *)new;
 	}
 	else if (ft_strequ(type, "t_links"))
 	{
@@ -21,10 +33,10 @@ void	ft_lstinsert(void *alst, void *new, const char *type)
 	}
 }
 
-void	ft_lstreverse(t_map **map)
+void			ft_lstreverse(t_map **map)
 {
-	t_map* cursor;
-	t_map* next;
+	t_map *cursor;
+	t_map *next;
 
 	cursor = NULL;
 	while (*map)
@@ -37,10 +49,20 @@ void	ft_lstreverse(t_map **map)
 	*map = cursor;
 }
 
-void	*create_node(void *data, const char *type)
+static void		*create_rooms_node(void *data)
+{
+	t_rooms *room;
+
+	room = malloc(sizeof(t_rooms));
+	room->name = ft_strdup(((char**)data)[0]);
+	room->x = ft_atoi(((char **)data)[1]);
+	room->y = ft_atoi(((char **)data)[2]);
+	return ((void*)room);
+}
+
+void			*create_node(void *data, const char *type)
 {
 	t_map	*map;
-	t_rooms	*room;
 	t_links	*link;
 
 	if (ft_strequ(type, "t_map"))
@@ -50,13 +72,7 @@ void	*create_node(void *data, const char *type)
 		return ((void *)map);
 	}
 	else if (ft_strequ(type, "t_rooms"))
-	{
-		room = malloc(sizeof(t_rooms));
-		room->name = ft_strdup(((char**)data)[0]);
-		room->x = ft_atoi(((char **)data)[1]);
-		room->y = ft_atoi(((char **)data)[2]);
-		return ((void*)room);
-	}
+		return (create_rooms_node(data));
 	else if (ft_strequ(type, "t_links"))
 	{
 		link = malloc(sizeof(t_links));

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 15:58:57 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/11 14:39:32 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:27:54 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	write_file_links(t_links *links)
 	t_links *tmp;
 	int		fd;
 
-	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file2.txt", O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0755);
+	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file2.txt",
+			O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0755);
 	tmp = links;
 	while (tmp)
 	{
@@ -29,13 +30,30 @@ static void	write_file_links(t_links *links)
 	}
 }
 
+void		write_file_2(t_rooms *room, int fd)
+{
+	t_rooms	*tmp;
+
+	tmp = room;
+	while (tmp)
+	{
+		ft_putstr_fd(tmp->name, fd);
+		ft_putstr_fd(" ", fd);
+		ft_putstr_fd(ft_itoa(tmp->x), fd);
+		ft_putstr_fd(" ", fd);
+		ft_putstr_fd(ft_itoa(tmp->y), fd);
+		ft_putchar_fd('\n', fd);
+		tmp = tmp->next;
+	}
+}
+
 void		write_file(t_data *data)
 {
 	int		fd;
-	t_rooms	*tmp;
 
 	write_file_links(data->links);
-	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt", O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0755);
+	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt",
+			O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0755);
 	ft_putstr_fd(data->start_room->name, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putstr_fd(ft_itoa(data->start_room->x), fd);
@@ -50,16 +68,6 @@ void		write_file(t_data *data)
 	ft_putchar_fd('\n', fd);
 	ft_putstr_fd(ft_itoa(data->nb_ants), fd);
 	ft_putchar_fd('\n', fd);
-	tmp = data->rooms;
-	while (tmp)
-	{
-		ft_putstr_fd(tmp->name, fd);
-		ft_putstr_fd(" ", fd);
-		ft_putstr_fd(ft_itoa(tmp->x), fd);
-		ft_putstr_fd(" ", fd);
-		ft_putstr_fd(ft_itoa(tmp->y), fd);
-		ft_putchar_fd('\n', fd);
-		tmp = tmp->next;
-	}
+	write_file_2(data->rooms, fd);
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 14:30:53 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:29:26 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool	get_start_end_room(char *line, t_data *data, int which)
 	return (true);
 }
 
-static int check_line(char *line)
+static int	check_line(char *line)
 {
 	if (ft_strequ("##start", line))
 		return (2);
@@ -52,7 +52,7 @@ static int check_line(char *line)
 	return (0);
 }
 
-static int get_ants(char *line, int *nb_ants)
+static int	get_ants(char *line, int *nb_ants)
 {
 	int ant;
 
@@ -66,15 +66,13 @@ static int get_ants(char *line, int *nb_ants)
 	return (0);
 }
 
-static int open_file(t_data *data)
+static int	open_file(t_data *data)
 {
 	char	*line;
 	int		argument;
 	int		fd;
 
-
 	fd = 0;
-	//fd = open("maps/continue_map.txt", O_RDWR);
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 	if (get_ants(line, &data->nb_ants) == -1)

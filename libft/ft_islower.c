@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 11:37:48 by emammadz          #+#    #+#             */
-/*   Updated: 2014/11/09 14:30:25 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:36:45 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_islower(int c)
+int	ft_islower(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (1);

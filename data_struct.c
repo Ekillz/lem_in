@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 13:50:27 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 14:19:17 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:47:51 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_path			*get_room_by_name(t_path **all_paths, const char *name)
 	return (NULL);
 }
 
-static void		link_path_rooms(t_path **all_paths, t_links *links, t_path *path)
+static void		link_path_rooms(t_path **paths, t_links *links, t_path *path)
 {
 	t_links *tmp_links;
 	int		i;
@@ -37,17 +37,16 @@ static void		link_path_rooms(t_path **all_paths, t_links *links, t_path *path)
 	{
 		if (ft_strequ(tmp_links->a, path->name))
 		{
-			path->links[i] = get_room_by_name(all_paths, tmp_links->b);
+			path->links[i] = get_room_by_name(paths, tmp_links->b);
 			i++;
 		}
 		else if (ft_strequ(tmp_links->b, path->name))
 		{
-			path->links[i] = get_room_by_name(all_paths, tmp_links->a);
+			path->links[i] = get_room_by_name(paths, tmp_links->a);
 			i++;
 		}
 		tmp_links = tmp_links->next;
 	}
-
 }
 
 static void		get_links(t_rooms *room, t_data *data, int i)
@@ -62,8 +61,10 @@ static void		get_links(t_rooms *room, t_data *data, int i)
 	data->paths[i]->is_free = true;
 	while (tmp_link)
 	{
-		if ((ft_strequ(tmp_link->a, room->name) && room_exist(data->rooms, tmp_link->b))
-				|| (ft_strequ(tmp_link->b, room->name) && room_exist(data->rooms, tmp_link->a)))
+		if ((ft_strequ(tmp_link->a, room->name) &&
+					room_exist(data->rooms, tmp_link->b)) ||
+				(ft_strequ(tmp_link->b, room->name) &&
+				room_exist(data->rooms, tmp_link->a)))
 			data->paths[i]->nb_links++;
 		tmp_link = tmp_link->next;
 	}
@@ -99,7 +100,6 @@ void			link_rooms(t_data *data)
 		data->paths[i] = malloc(sizeof(t_path));
 		data->paths[i]->is_end = malloc(sizeof(bool));
 		data->paths[i]->is_end = false;
-		//get_links(tmp_room, data, &data->paths[i]->nb_links, data->paths[i]);
 		get_links(tmp_room, data, i);
 		tmp_room = tmp_room->next;
 		i++;
@@ -107,7 +107,8 @@ void			link_rooms(t_data *data)
 	i = 0;
 	while (i < list_len)
 	{
-		data->paths[i]->links = malloc(sizeof(t_path *) * data->paths[i]->nb_links);
+		data->paths[i]->links = malloc(sizeof(t_path *) *
+				data->paths[i]->nb_links);
 		link_path_rooms(data->paths, data->links, data->paths[i]);
 		i++;
 	}

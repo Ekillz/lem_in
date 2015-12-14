@@ -6,13 +6,13 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/23 16:29:15 by emammadz          #+#    #+#             */
-/*   Updated: 2015/03/23 16:30:15 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:36:38 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isgraph(int c)
+int	ft_isgraph(int c)
 {
 	if (c >= 33 && c <= 126)
 		return (1);

@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 16:06:37 by emammadz          #+#    #+#             */
-/*   Updated: 2014/11/07 17:19:16 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:40:14 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	int i;
 

@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 14:28:20 by emammadz          #+#    #+#             */
-/*   Updated: 2015/10/22 13:42:18 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:39:30 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strcat(char *s1, const char *s2)
+char	*ft_strcat(char *s1, const char *s2)
 {
 	char *t_s1;
 

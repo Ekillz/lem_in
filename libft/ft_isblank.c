@@ -6,13 +6,13 @@
 /*   By: emammadz <emammadz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/29 16:31:56 by emammadz          #+#    #+#             */
-/*   Updated: 2014/12/29 17:14:24 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 16:36:31 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isblank(int c)
+int	ft_isblank(int c)
 {
 	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
