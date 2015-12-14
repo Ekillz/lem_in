@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/11 18:10:28 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 13:36:52 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int get_ants(char *line, int *nb_ants)
 	int ant;
 
 	ant = ft_atoi(line);
-	if (ant <= 0) // look at ft_isdigit again ( || ft_isdigit)
+	if (ant <= 0)
 	{
 		ft_putendl("Not enough ants or not digit");
 		return (-1);
@@ -73,8 +73,8 @@ static int open_file(t_data *data)
 	int		fd;
 
 
-	fd = 0;
-	//fd = open("maps/map3.txt", O_RDWR);
+	//fd = 0;
+	fd = open("maps/continue_map.txt", O_RDWR);
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 	if (get_ants(line, &data->nb_ants) == -1)

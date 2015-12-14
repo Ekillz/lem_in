@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/14 13:10:34 by emammadz          #+#    #+#             */
+/*   Updated: 2015/12/14 13:35:02 by emammadz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 void	recursive_check_path(t_path *path)
@@ -37,7 +49,8 @@ int		get_count_room_links(char *line, bool *miss_room, t_rooms *rooms, t_links *
 	{
 		datas = ft_strsplit(line, ' ');
 		if (!datas[0] || !datas[1] || !datas[2] ||
-				ft_isdigit(ft_atoi(datas[1])) || ft_isdigit(ft_atoi(datas[2])))
+				!ft_strequ(ft_itoa(ft_atoi(datas[1])), datas[1]) ||
+				!ft_strequ(ft_itoa(ft_atoi(datas[2])), datas[2]))
 		{
 			verbose++;
 		}
