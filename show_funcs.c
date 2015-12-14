@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 16:21:00 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/09 14:44:24 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 13:53:40 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	show_map(t_map *map)
 	t_map *tmp;
 
 	tmp = map;
-	while (map)
+	while (tmp)
 	{
-		ft_putendl(map->line);
-		map = map->next;
+		ft_putendl(tmp->line);
+		tmp = tmp->next;
 	}
 	ft_putchar('\n');
 }

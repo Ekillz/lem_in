@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 13:50:27 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/11 18:11:51 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 13:54:38 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ static void		link_path_rooms(t_path **all_paths, t_links *links, t_path *path)
 
 }
 
-static void		get_links(t_rooms *room, t_links *links, int *nb_links, t_path *path)
+static void		get_links(t_rooms *room, t_data *data, int i)
 {
 	t_links	*tmp_link;
 
-	tmp_link = links;
-	*nb_links = 0;
-	path->name = room->name;
-	path->x = room->x;
-	path->y = room->y;
-	path->is_free = true;
+	tmp_link = data->links;
+	data->paths[i]->nb_links = 0;
+	data->paths[i]->name = room->name;
+	data->paths[i]->x = room->x;
+	data->paths[i]->y = room->y;
+	data->paths[i]->is_free = true;
 	while (tmp_link)
 	{
-		if (ft_strequ(tmp_link->a, room->name) || ft_strequ(tmp_link->b, room->name))
-			(*nb_links)++;
+		if ((ft_strequ(tmp_link->a, room->name) && get_room_by_name(data->paths, data->paths[i]->name))
+				|| (ft_strequ(tmp_link->b, room->name) && get_room_by_name(data->paths, data->paths[i]->name)))
+			data->paths[i]->nb_links++;
 		tmp_link = tmp_link->next;
 	}
 }
@@ -98,7 +99,8 @@ void			link_rooms(t_data *data)
 		data->paths[i] = malloc(sizeof(t_path));
 		data->paths[i]->is_end = malloc(sizeof(bool));
 		data->paths[i]->is_end = false;
-		get_links(tmp_room, data->links, &data->paths[i]->nb_links, data->paths[i]);
+		//get_links(tmp_room, data, &data->paths[i]->nb_links, data->paths[i]);
+		get_links(tmp_room, data, i);
 		tmp_room = tmp_room->next;
 		i++;
 	}
