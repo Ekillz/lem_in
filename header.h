@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/11 18:07:02 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 14:45:14 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void			show_map(t_map *map);
 void			write_file(t_data *data);
 void			recursive_check_path(t_path *path);
 void			no_path_possible(void);
+int				room_exist(t_rooms *rooms, const char *name);
 #endif

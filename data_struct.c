@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 13:50:27 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 13:54:38 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 14:19:17 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void		get_links(t_rooms *room, t_data *data, int i)
 	data->paths[i]->is_free = true;
 	while (tmp_link)
 	{
-		if ((ft_strequ(tmp_link->a, room->name) && get_room_by_name(data->paths, data->paths[i]->name))
-				|| (ft_strequ(tmp_link->b, room->name) && get_room_by_name(data->paths, data->paths[i]->name)))
+		if ((ft_strequ(tmp_link->a, room->name) && room_exist(data->rooms, tmp_link->b))
+				|| (ft_strequ(tmp_link->b, room->name) && room_exist(data->rooms, tmp_link->a)))
 			data->paths[i]->nb_links++;
 		tmp_link = tmp_link->next;
 	}

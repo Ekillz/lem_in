@@ -6,11 +6,25 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 13:10:34 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 13:35:02 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 14:27:19 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+int		room_exist(t_rooms *rooms, const char *name)
+{
+	t_rooms *tmp;
+
+	tmp = rooms;
+	while (tmp)
+	{
+		if (ft_strequ(tmp->name, name))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
 void	recursive_check_path(t_path *path)
 {

@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 13:46:30 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/14 14:30:53 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static int open_file(t_data *data)
 	int		fd;
 
 
-	//fd = 0;
-	fd = open("maps/continue_map.txt", O_RDWR);
+	fd = 0;
+	//fd = open("maps/continue_map.txt", O_RDWR);
 	get_next_line(fd, &line);
 	ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 	if (get_ants(line, &data->nb_ants) == -1)
@@ -107,6 +107,7 @@ static int open_file(t_data *data)
 	ft_lstreverse(&data->map);
 	data->links = data->links->next;
 	data->rooms = data->rooms->next;
+	show_map(data->map);
 	if (check_missing_data(data->miss_start, data->miss_end, data->miss_room) == -1)
 		return (-1);
 	return (0);
@@ -121,7 +122,6 @@ int main(void)
 		exit(-1);
 	link_rooms(&data);
 	assign_ants(&data);
-	show_map(data.map);
 	write_file(&data);
 	recursive_check_path(get_room_by_name(data.paths, data.start_room->name));
 	if (!(get_room_by_name(data.paths, data.end_room->name))->is_end)
