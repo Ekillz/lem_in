@@ -6,11 +6,12 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 14:45:52 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/15 16:24:11 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 17:38:47 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+#include <stdio.h>
 
 static bool	get_start_end_room(char *line, t_data *data, int which)
 {
@@ -42,26 +43,35 @@ static int	check_line(char *line, bool *thick)
 	return (0);
 }
 
+static int	check_start_end(int argument, char *line, t_data *data)
+{
+	if (argument == 2)
+	{
+		if (get_start_end_room(line, data, 0))
+			return (1);
+	}
+	else if (argument == 1)
+	{
+		if (get_start_end_room(line, data, 1))
+			return (1);
+	}
+	return (0);
+}
+
 void		read_map_loop(t_data *data, char *line, int argument)
 {
 	while (get_next_line(0, &line))
 	{
+		if (ft_strequ(ft_strtrim(line), ""))
+			get_next_line(0, &line);
 		ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
 		if ((argument = check_line(line, &data->thick)) > 0)
 		{
 			while (get_next_line(0, &line))
 			{
 				ft_lstinsert(data->map, create_node(line, "t_map"), "t_map");
-				if (argument == 2)
-				{
-					if (get_start_end_room(line, data, 0))
-						break ;
-				}
-				else if (argument == 1)
-				{
-					if (get_start_end_room(line, data, 1))
-						break ;
-				}
+				if (check_start_end(argument, line, data))
+					break ;
 			}
 		}
 		if (get_count_room_links(line, &data->miss_room,

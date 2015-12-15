@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:06:53 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/15 16:09:04 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 17:29:19 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int			main(void)
 	if (!(get_room_by_name(data.paths, data.end_room->name))->is_end)
 		no_path_possible();
 	find_path(data.end_room, data.ants, data.nb_ants, data.start_room);
+	system("open visual.app");
 	return (0);
 }
