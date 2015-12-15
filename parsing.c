@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 13:10:34 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 17:24:49 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 16:27:55 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	declare_structs(t_data *data)
 	data->miss_start = true;
 	data->miss_end = true;
 	data->miss_room = true;
+	data->thick = malloc(sizeof(bool));
+	data->thick = false;
 }
 
 void	check_room_error(char **datas, int *verbose, t_rooms *room, bool *miss)

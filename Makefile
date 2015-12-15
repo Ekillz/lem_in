@@ -6,7 +6,7 @@
 #    By: emammadz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 15:04:55 by emammadz          #+#    #+#              #
-#    Updated: 2015/12/08 16:16:21 by emammadz         ###   ########.fr        #
+#    Updated: 2015/12/15 14:51:32 by emammadz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ EXEC = lem-in
 SRCC =	main.c\
 		get_next_line.c\
 		parsing.c\
+		parsing2.c\
 		ft_lsts.c\
 		error.c\
 		data_struct.c\

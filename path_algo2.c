@@ -6,11 +6,30 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 13:37:36 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/07 16:36:39 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 15:54:05 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void	check_ant_finish(t_ant *ant, char *name, int *out)
+{
+	if (ft_strequ(ant->path->name, name) && !ant->is_out)
+	{
+		ant->is_out = true;
+		(*out)++;
+	}
+}
+
+void	change_ant_path(t_ant *ant, int weight_return, t_rooms *start)
+{
+	if (!ft_strequ(ant->path->name, start->name))
+		ant->path->is_free = true;
+	ft_lstinsert(ant->last_path,
+			create_node(ant->path->name, "t_map"), "t_map");
+	ant->path = ant->path->links[weight_return];
+	ant->path->is_free = false;
+}
 
 void	alloc_last_path(t_ant **ants, int nb_ants)
 {

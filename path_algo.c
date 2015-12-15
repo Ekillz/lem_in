@@ -6,37 +6,37 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 13:06:49 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 14:19:23 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 15:52:47 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static int	check_last_path(t_ant *ant, int *weight_total, int *sorted_tab, t_rooms *end)
+static int	check_last_path(t_ant *ant, int *weight, int *tab, t_rooms *end)
 {
 	int i;
 	int	e;
 
 	e = 0;
-	i = 0;
+	i = -1;
 	if (ant->is_out)
 		return (-1);
-	while (weight_total[i])
+	while (weight[++i])
 	{
-		if (weight_total[i] == sorted_tab[e])
+		if (weight[i] == tab[e])
 		{
-			if (compare_last_path(ant, i) >= 0 && (ant->path->links[i]->is_free || ft_strequ(ant->path->links[i]->name, end->name)))
+			if (compare_last_path(ant, i) >= 0 && (ant->path->links[i]->is_free
+						|| ft_strequ(ant->path->links[i]->name, end->name)))
 			{
-				free(weight_total);
+				free(weight);
 				return (i);
 			}
 			else
 			{
-				if (check_last_path_2(sorted_tab, &e, &i) == -1)
-					break;
+				if (check_last_path_2(tab, &e, &i) == -1)
+					break ;
 			}
 		}
-		i++;
 	}
 	return (-1);
 }
@@ -47,14 +47,11 @@ static int	*sort(int *tab, int len)
 	int tmp;
 	int	*new_tab;
 
-	i = 0;
+	i = -1;
 	new_tab = malloc(sizeof(int) * len);
 	ft_memset(&new_tab[len], 0, sizeof(int));
-	while (i < len)
-	{
+	while (++i < len)
 		new_tab[i] = tab[i];
-		i++;
-	}
 	i = 0;
 	while (new_tab[i + 1])
 	{
@@ -89,7 +86,8 @@ static int	get_weight(t_ant *ant, t_rooms *end_room)
 	ft_memset(&weight_total[ant->path->nb_links], 0, sizeof(int));
 	while (i < ant->path->nb_links)
 	{
-		weight_total[i] = get_abs(end_room->x - ant->path->links[i]->x) + get_abs(end_room->y - ant->path->links[i]->y);
+		weight_total[i] = get_abs(end_room->x - ant->path->links[i]->x) +
+			get_abs(end_room->y - ant->path->links[i]->y);
 		weight_total[i] += 2;
 		if (!ant->path->links[i]->is_free)
 			weight_total[i] += 1000000;
@@ -108,34 +106,24 @@ void		find_path(t_rooms *end, t_ant **ants, int nb_ants, t_rooms *start)
 	int		out;
 	int		fd;
 
-	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt", O_RDWR | O_APPEND);
+	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt",
+			O_RDWR | O_APPEND);
 	out = 0;
 	alloc_last_path(ants, nb_ants);
-	while (1)
+	while (out != nb_ants)
 	{
-		i = 0;
-		while (i < nb_ants)
+		i = -1;
+		while (++i < nb_ants)
 		{
 			if ((weight_return = get_weight(ants[i], end)) >= 0)
 			{
-				if (!ft_strequ(ants[i]->path->name, start->name))
-						ants[i]->path->is_free = true;
-				ft_lstinsert(ants[i]->last_path, create_node(ants[i]->path->name, "t_map"), "t_map");
-				ants[i]->path = ants[i]->path->links[weight_return];
-				ants[i]->path->is_free = false;
+				change_ant_path(ants[i], weight_return, start);
 				show_moves(i, ants[i]->path->name, fd);
 			}
-			if (ft_strequ(ants[i]->path->name, end->name) && !ants[i]->is_out)
-			{
-				ants[i]->is_out = true;
-				out++;
-			}
-			i++;
+			check_ant_finish(ants[i], end->name, &out);
 		}
 		ft_putchar('\n');
 		ft_putchar_fd('\n', fd);
-		if (out == nb_ants)
-			break ;
 	}
 	close(fd);
 }

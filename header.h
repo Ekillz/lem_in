@@ -6,7 +6,7 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 15:15:55 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 17:32:15 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 16:28:00 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_data
 	bool		miss_end;
 	bool		miss_room;
 	int			nb_ants;
+	bool		thick;
 	t_map		*map;
 	t_rooms		*rooms;
 	t_links		*links;
@@ -106,4 +107,9 @@ void			write_file(t_data *data);
 void			recursive_check_path(t_path *path);
 void			no_path_possible(void);
 int				room_exist(t_rooms *rooms, const char *name);
+void			alloc_start_end(t_rooms **room, char **datas,
+		bool *miss, int which);
+void			read_map_loop(t_data *data, char *line, int argument);
+void			change_ant_path(t_ant *ant, int weight_return, t_rooms *start);
+void			check_ant_finish(t_ant *ant, char *name, int *out);
 #endif

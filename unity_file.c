@@ -6,13 +6,13 @@
 /*   By: emammadz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 15:58:57 by emammadz          #+#    #+#             */
-/*   Updated: 2015/12/14 17:27:54 by emammadz         ###   ########.fr       */
+/*   Updated: 2015/12/15 16:25:53 by emammadz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static void	write_file_links(t_links *links)
+static void	write_file_links(t_links *links, bool thick)
 {
 	t_links *tmp;
 	int		fd;
@@ -28,6 +28,9 @@ static void	write_file_links(t_links *links)
 		ft_putchar_fd('\n', fd);
 		tmp = tmp->next;
 	}
+	if (thick)
+		ft_putstr_fd("thick", fd);
+	close(fd);
 }
 
 void		write_file_2(t_rooms *room, int fd)
@@ -51,7 +54,7 @@ void		write_file(t_data *data)
 {
 	int		fd;
 
-	write_file_links(data->links);
+	write_file_links(data->links, data->thick);
 	fd = open("/nfs/zfs-student-3/users/emammadz/unity_file/file.txt",
 			O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0755);
 	ft_putstr_fd(data->start_room->name, fd);
